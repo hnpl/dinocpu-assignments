@@ -43,13 +43,13 @@ TODO
 ## Collecting Data
 
 ## Question 1
-Make a graph presenting the IPC of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
+For this question, you will be creating a graph presenting the IPC of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
 
 ## Question 2
-Make a graph presenting the performance (i.e., the time it takes for a CPU design to run application) of of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
+For this question, you will be creating a graph presenting the *performance* (i.e., the time it takes for a CPU design to run application) of of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
 
 ## Question 3
-Make a table presenting the speedup of the new CPU design (pipelined-dual-issue) compared to the old CPU design (pipelined).
+For this question, you will be creating a table presenting the speedups of the new CPU design (pipelined-dual-issue) compared to the old CPU design (pipelined) for each workload, both normal and unrolled.
 
 ## Hints
 - For each of Question 1 and Question 2, there should be 36 data points to present, e.g., for the `multiply` workload,
@@ -59,27 +59,31 @@ Make a table presenting the speedup of the new CPU design (pipelined-dual-issue)
   - `multiply-loops-unrolled.riscv` + `single-cycle`
   - `multiply-loops-unrolled.riscv` + `pipelined`
   - `multiply-loops-unrolled.riscv` + `pipelined-dual-issue`
+- You do **not** need to include raw data for Question 1 and Question 2, or how the calculation is done.
 - The expectations for the graphs will be discussed in one of discussion sessions.
-- For Question 3, the expected table looks like the following table,
+- For Question 3, you do **not** need to show how the calculation is done.
+- Also for Question 3, the expected table looks like the following table,
 
-|              Benchmarks | pipelined (in some unit) | pipelined-dual-issue (in some unit) | speedup |
+|              Benchmarks |   pipelined (in seconds) |   pipelined-dual-issue (in seconds) | speedup |
 |-------------------------|--------------------------|-------------------------------------|---------|
 |                multiply |                          |                                     |         |
-|  multiply-loops-unrolls |                          |                                     |         |
+| multiply-loops-unrolled |                          |                                     |         |
 |                  median |                          |                                     |         |
-|    median-loops-unrolls |                          |                                     |         |
+|   median-loops-unrolled |                          |                                     |         |
 |                   qsort |                          |                                     |         |
-|     qsort-loops-unrolls |                          |                                     |         |
+|    qsort-loops-unrolled |                          |                                     |         |
 |                   rsort |                          |                                     |         |
-|     rsort-loops-unrolls |                          |                                     |         |
+|    rsort-loops-unrolled |                          |                                     |         |
 |                  towers |                          |                                     |         |
-|    towers-loops-unrolls |                          |                                     |         |
+|   towers-loops-unrolled |                          |                                     |         |
 |                   vvadd |                          |                                     |         |
-|     vvadd-loops-unrolls |                          |                                     |         |
-
+|    vvadd-loops-unrolled |                          |                                     |         |
 
 ------------------------------------------------------------------------------------------------------------
 # Part III: Performance Analysis
+In this part, we will analysis some interesting result!
+
+
 
 ------------------------------------------------------------------------------------------------------------
 # Part IV:
