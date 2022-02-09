@@ -23,7 +23,9 @@ In this part, you will complete the forwarding unit and the hazard detection uni
 - For the hazard detection unit, note that if the instruction at PC is a branch/jump/load/store, only the instruction at PC will be issued in this cycle (meaning, the instruction at PC+4 will be issued in the next cycle).
 
 ## Testing the Dual-issue Pipelined CPU
-TODO
+```
+
+```
 
 ### Full Application Traces
 TODO
@@ -81,7 +83,7 @@ For this question, you will be creating a table presenting the speedups of the n
 
 ------------------------------------------------------------------------------------------------------------
 # Part III: Performance Analysis
-In this part, you will analyze some interesting result!
+In this part, you will analyze some interesting results!
 
 ## Question 4
 In Part II, you should see that shifting from the original pipelined CPU to the dual-issue pipelined CPU results in a speedup (in terms of *performance*) for the `rsort-loops-unrolled` workload, and a slowdown (in terms of *performance*) for the `qsort-loops-unrolled` workload.
@@ -92,3 +94,5 @@ In Part II, you should see that shifting from the original workload to the loops
 Explain the speedup and the slowdown.
 
 ## Hints
+- For every workload, there would be some functions or loops that consume most of the cycles. It is useful to find the functions or loops (either in the C code or the assembly code) and do analysis on how they being run by the CPU. This is called *program profiling*, which helps part of a program producing most of time complexity.
+- You do not have to analyze all characteristics of the workloads (it would be beneficial to find the aspects of the binary that affect the CPU performance, but it is not essential to find all of them for this assignment). An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits. Make sure that the ideas are well-explained.
