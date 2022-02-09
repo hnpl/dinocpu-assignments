@@ -24,14 +24,17 @@ In this part, you will complete the forwarding unit and the hazard detection uni
 
 ## Testing the Dual-issue Pipelined CPU
 ```
-
+Lab4 / testOnly dinocpu.SmallTestsTesterLab4
+Lab4 / testOnly dinocpu.DualIssueForwardingTesterLab4                   
+Lab4 / testOnly dinocpu.FullApplicationsTesterLab4
+Lab4 / testOnly dinocpu.LoopsUnrolledFullApplicationsTesterLab4
 ```
 
 ### Full Application Traces
-TODO
+TODO: add links to the commit traces
 
 ## Submissions
-TODO
+TODO: add links to Gradescope
 
 ------------------------------------------------------------------------------------------------------------
 # Part II: Performance Evaluation
@@ -94,5 +97,62 @@ In Part II, you should see that shifting from the original workload to the loops
 Explain the speedup and the slowdown.
 
 ## Hints
-- For every workload, there would be some functions or loops that consume most of the cycles. It is useful to find the functions or loops (either in the C code or the assembly code) and do analysis on how they being run by the CPU. This is called *program profiling*, which helps part of a program producing most of time complexity.
-- You do not have to analyze all characteristics of the workloads (it would be beneficial to find the aspects of the binary that affect the CPU performance, but it is not essential to find all of them for this assignment). An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits. Make sure that the ideas are well-explained.
+- For every workload, there would be some functions or loops that consume most of the cycles. It is useful to find the functions or loops (either in the C code or the assembly code) and do analysis on how they being run by the CPU. Note that the commit trace only contains the PC of the instructions that are committed; there are instructions that might waste several CPU cycles as such the ones followed a mis-predicted branch or a jump, those instrutions enter the pipeline and then being flushed. Since they consume CPU cycles, they are also part of the workload performance. This method is called *program profiling*, which helps finding part of a program producing most of time complexity.
+- For program profiling, you might want to write a printf function printing the instructions that are issued to see all the PC of all instructions that ever entered the pipeline. You can find an example of how the commit traces are produced near the end of the file `src/main/scala/pipelined/dual-issue.scala`.
+- You do not have to analyze all characteristics of the workloads (it would be beneficial to find all aspects of the binary that affect the CPU performance, but it is not essential to find all of them for this assignment). An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits. Make sure that the ideas are well-explained.
+
+# Conclusion
+In this assignment, we hope to provide quantitative evidence of how a new CPU design influences the performance of software, and how understanding the microarchitecture of a CPU, even at the high level, might help improving software performance.
+We also hope to show a general theme of making hardware design decisions: there almost always some trade-offs between design complexity and overall performance improvement.
+
+# Logistics
+## Grading
+Part I will be automatically graded on Gradescope.
+See the Submission section for more details.
+| Part                | Percentage |
+|---------------------|------------|
+| Part 4.1            |        20% |
+| Part 4.2 Question 1 |        20% |
+| Part 4.2 Question 2 |        20% |
+| Part 4.2 Question 3 |        10% |
+| Part 4.3 Question 4 |        15% |
+| Part 4.3 Question 5 |        15% |
+## Submission
+**Warning:** read the submission instructions carefully. Failure to adhere to the instructions will result in a loss of points.
+
+### Code Portion
+You will upload the following files to Gradescope on the `Assignment 4: Code` assignment,
+- `src/main/scala/components/dual/hazard.scala`
+- `src/main/scala/components/dual/forwarding.scala`
+
+Once uploaded, Gradescope will automatically download and run your code.
+This should take less than 10 minutes.
+For each part of the assignment, you will receive a grade.
+If all of your tests are passing locally, they should also pass on Gradescope unless you made changes to the I/O, which you are not allowed to do.
+
+**Note:** Make sure that you comment out or remove all printing statements in your submissions.
+There are a lot of long tests for this assignment.
+The auto-grader might fail complete grading within the allocated time if there are too many output statements.
+(Outputing to `stdout/stderr` is very costly time-wise!)
+
+### Written Portion
+You will upload your answers for the `Assignment 4: Written` assignment to Gradescope.
+Please upload a separate page for each answer!
+Additionally, I believe Gradescope allows you to circle the area with your final answer.
+Make sure to do this!
+
+We will not grade any questions for which we are unable to read.
+Be sure to check your submission to make sure it's legible, right-side-up, etc.
+
+### Academic misconduct reminder
+You are to work on this project **individually**. You may discuss *high level concepts* with one another (e.g., talking about the diagram), but all work must be completed on your own.
+
+**Remember, DO NOT POST YOUR CODE PUBLICLY ON GITHUB!**
+Any code found on GitHub that is not the base template you are given will be reported to SJA.
+If you want to sidestep this problem entirely, don't create a public fork and instead create a private repository to store your work.
+GitHub now allows everybody to create unlimited private repositories for up to three collaborators, and you shouldn't have any collaborators for your code for this assignment.
+
+## Hints
+- **Start early!** Completing part 4.1 is essential for the next parts.
+- If you need help, come to office hours for the TAs, or post your questions on Campuswire.
+- See common errors for some common errors and their solutions.
