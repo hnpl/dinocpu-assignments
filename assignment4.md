@@ -16,7 +16,7 @@ In this part, you will complete the forwarding unit and the hazard detection uni
 - Forwarding unit: `src/main/scala/components/dual/forwarding.scala`.
 - Hazard detection unit: `src/main/scala/components/dual/hazard.scala`.
 
-**Hints:**
+## Hints
 - The logics for forwarding and hazard detection for dual-issue pipelined CPU share the same underlying principles as their counterparts in the original pipelined CPU.
 - It is helpful to layout all instructions in the pipeline from least recently issued to most recently issued. This matters as there might be multiple of options for forwarding to an instruction at the EX stage, but only one option is valid.
 - For the forwarding unit, note that only one instruction will be issued if the two fetched instructions have data dependencies (meaning, the earlier instruction writes to a register that the next instruction will use as a source register).
@@ -42,9 +42,41 @@ TODO
 
 ## Collecting Data
 
-## Questions:
-**Question 1:** Make a graph presenting the IPC of 
-**Question 2:** Make a graph presenting the performance of 
+## Question 1
+Make a graph presenting the IPC of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
+
+## Question 2
+Make a graph presenting the performance (i.e., the time it takes for a CPU design to run application) of of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
+
+## Question 3
+Make a table presenting the speedup of the new CPU design (pipelined-dual-issue) compared to the old CPU design (pipelined).
+
+## Hints
+- For each of Question 1 and Question 2, there should be 36 data points to present, e.g., for the `multiply` workload,
+  - `multiply.riscv` + `single-cycle`
+  - `multiply.riscv` + `pipelined`
+  - `multiply.riscv` + `pipelined-dual-issue`
+  - `multiply-loops-unrolled.riscv` + `single-cycle`
+  - `multiply-loops-unrolled.riscv` + `pipelined`
+  - `multiply-loops-unrolled.riscv` + `pipelined-dual-issue`
+- The expectations for the graphs will be discussed in one of discussion sessions.
+- For Question 3, the expected table looks like the following table,
+
+|              Benchmarks | pipelined (in some unit) | pipelined-dual-issue (in some unit) | speedup |
+|-------------------------|--------------------------|-------------------------------------|---------|
+|                multiply |                          |                                     |         |
+|  multiply-loops-unrolls |                          |                                     |         |
+|                  median |                          |                                     |         |
+|    median-loops-unrolls |                          |                                     |         |
+|                   qsort |                          |                                     |         |
+|     qsort-loops-unrolls |                          |                                     |         |
+|                   rsort |                          |                                     |         |
+|     rsort-loops-unrolls |                          |                                     |         |
+|                  towers |                          |                                     |         |
+|    towers-loops-unrolls |                          |                                     |         |
+|                   vvadd |                          |                                     |         |
+|     vvadd-loops-unrolls |                          |                                     |         |
+
 
 ------------------------------------------------------------------------------------------------------------
 # Part III: Performance Analysis
