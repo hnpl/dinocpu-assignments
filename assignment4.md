@@ -81,10 +81,14 @@ For this question, you will be creating a table presenting the speedups of the n
 
 ------------------------------------------------------------------------------------------------------------
 # Part III: Performance Analysis
-In this part, we will analysis some interesting result!
+In this part, you will analyze some interesting result!
 
+## Question 4
+In Part II, you should see that shifting from the original pipelined CPU to the dual-issue pipelined CPU results in a speedup (in terms of *performance*) for the `rsort-loops-unrolled` workload, and a slowdown (in terms of *performance*) for the `qsort-loops-unrolled` workload.
+Explain the speedup and the slowdown.
 
+## Question 5
+In Part II, you should see that shifting from the original workload to the loops unrolled workload for dual-issue pipelined CPU leads to a speed up (either in terms of cycles or performance) for the `rsort` workloads, and a slowdown (either in terms of cycles or performance) for the `qsort` workloads.
+Explain the speedup and the slowdown.
 
-------------------------------------------------------------------------------------------------------------
-# Part IV:
-------------------------------------------------------------------------------------------------------------
+## Hints
