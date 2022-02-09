@@ -42,10 +42,32 @@ In this part, you will collect the data for the next steps.
 
 Now that we completed three different CPU designs (single-cycle, pipelined, pipelined-dual-issue), we can evaluate and compare their performances on different benchmarks.
 
-## Loop-unrolling Technique
+## Loop-unrolling
 TODO
 
 ## Collecting Data
+The following command will simulate a binary with a CPU type and will output the number of simulated cycles at the end of simulation,
+```
+runMain dinocpu.simulate <binary-name> <cpu-type>
+```
+For this assignment, the CPU types of interest are,
+- `single-cycle`
+- `pipelined`
+- `pipelined-dual-issue`
+
+and the binaries of interest are,
+- `multiply.riscv`
+- `multiply-loops-unrolled.riscv`
+- `median.riscv`
+- `median-loops-unrolled.riscv`
+- `qsort.riscv`
+- `qsort-loops-unrolled.riscv`
+- `rsort.riscv`
+- `rsort-loops-unrolled.riscv`
+- `towers.riscv`
+- `towers-loops-unrolled.riscv`
+- `vvadd.riscv`
+- `vvadd-loops-unrolled.riscv`
 
 ## Question 1
 For this question, you will be creating a graph presenting the IPC of all combinations of CPU designs with all full applications *without* loop-unrollings and *with* loop-unrollings.
@@ -97,15 +119,24 @@ In Part II, you should see that shifting from the original workload to the loops
 Explain the speedup and the slowdown.
 
 ## Hints
-- For every workload, there would be some functions or loops that consume most of the cycles. It is useful to find the functions or loops (either in the C code or the assembly code) and do analysis on how they being run by the CPU. Note that the commit trace only contains the PC of the instructions that are committed; there are instructions that might waste several CPU cycles as such the ones followed a mis-predicted branch or a jump, those instrutions enter the pipeline and then being flushed. Since they consume CPU cycles, they are also part of the workload performance. This method is called *program profiling*, which helps finding part of a program producing most of time complexity.
-- For program profiling, you might want to write a printf function printing the instructions that are issued to see all the PC of all instructions that ever entered the pipeline. You can find an example of how the commit traces are produced near the end of the file `src/main/scala/pipelined/dual-issue.scala`.
-- You do not have to analyze all characteristics of the workloads (it would be beneficial to find all aspects of the binary that affect the CPU performance, but it is not essential to find all of them for this assignment). An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits. Make sure that the ideas are well-explained.
+- For every workload, there would be some functions or loops that consume most of the cycles.
+It is useful to find the functions or loops (either in the C code or the assembly code) and do analysis on how they being run by the CPU.
+- Note that the commit trace only contains the PC of the instructions that are committed.
+There are instructions that might waste several CPU cycles as such the ones followed a mis-predicted branch or a jump, those instrutions enter the pipeline and then being flushed.
+Since they consume CPU cycles, they are also part of the workload performance.
+This method is called *program profiling*, which helps finding part of a program producing most of time complexity.
+- For program profiling, you might want to write a printf function printing the instructions that are issued to see all the PC of all instructions that ever entered the pipeline.
+You can find an example of how the commit traces are produced near the end of the file `src/main/scala/pipelined/dual-issue.scala`.
+- You do not have to analyze all characteristics of the workloads (although it would be beneficial to find all aspects of the binary that affect the CPU performance, it is not essential to capture all of them for this assignment).
+An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits.
+Make sure that the ideas are well-explained.
 
 # Conclusion
 In this assignment, we hope to provide quantitative evidence of how a new CPU design influences the performance of software, and how understanding the microarchitecture of a CPU, even at the high level, might help improving software performance.
-We also hope to show a general theme of making hardware design decisions: there almost always some trade-offs between design complexity and overall performance improvement.
+We also hope to show a general theme of making hardware design decisions: there almost always some trade-offs between the design complexity and the overall performance improvement.
 
 # Logistics
+
 ## Grading
 Part I will be automatically graded on Gradescope.
 See the Submission section for more details.
@@ -117,6 +148,7 @@ See the Submission section for more details.
 | Part 4.2 Question 3 |        10% |
 | Part 4.3 Question 4 |        15% |
 | Part 4.3 Question 5 |        15% |
+
 ## Submission
 **Warning:** read the submission instructions carefully. Failure to adhere to the instructions will result in a loss of points.
 
@@ -133,7 +165,7 @@ If all of your tests are passing locally, they should also pass on Gradescope un
 **Note:** Make sure that you comment out or remove all printing statements in your submissions.
 There are a lot of long tests for this assignment.
 The auto-grader might fail complete grading within the allocated time if there are too many output statements.
-(Outputing to `stdout/stderr` is very costly time-wise!)
+(Outputting to `stdout/stderr` is very costly time-wise!)
 
 ### Written Portion
 You will upload your answers for the `Assignment 4: Written` assignment to Gradescope.
@@ -145,7 +177,8 @@ We will not grade any questions for which we are unable to read.
 Be sure to check your submission to make sure it's legible, right-side-up, etc.
 
 ### Academic misconduct reminder
-You are to work on this project **individually**. You may discuss *high level concepts* with one another (e.g., talking about the diagram), but all work must be completed on your own.
+You are to work on this project **individually**.
+You may discuss *high level concepts* with one another (e.g., talking about the diagram), but all work must be completed on your own.
 
 **Remember, DO NOT POST YOUR CODE PUBLICLY ON GITHUB!**
 Any code found on GitHub that is not the base template you are given will be reported to SJA.
