@@ -13,12 +13,28 @@ Due on TODO: See [Submission]?? for details
 # Table of Contents
 
 # Introduction
+
 ## Updating the DINO CPU Code
+
 ## How This Assignment is Written
+
+
 ## I/O Constraint
+We are making one major constraint on how you are implementing your CPU.
+**You may not modify the I/O for any module.**
+This is the same constraint that you had in other assignments.
+We will run all available tests on the dual-issue CPU design.
+Therefore, you must **keep the exact same I/O**.
+You will get errors on Gradescope (and thus no credit) if you modify the I/O.
+
 ## Goals
+- Learning to resolve the data hazards in a dual-issue CPU using forwarding/stalling/flushing.
+- Learning to compare the performance of different CPU designs.
+- Learning to analyze how a workload perform differently different CPU designs.
+- Learning to analyze how software optimizations might affect a CPU performance.
+
 ## Glossary
-|Term| |
+|Terms| Definitions |
 |----|-|
 |issue| A CPU issuing an instruction means that the CPU decides that that instruction will enter the pipeline. Issuing happens in the IF stage; however, issuing is different from fetching. At each cycle, by inputting a PC, the imem (instruction memory) will fetch 2 instructions at address of `(PC // 8) * 8`, but the issue unit might not necessary issue both instructions. |
 |commit| A CPU committing an instruction means that that instruction goes through all 5 stages of the pipeline.  |
