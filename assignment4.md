@@ -148,7 +148,7 @@ One of the most notable change of the dual-issue design is that it has a much mo
 This caused by complex logics for determining the data dependencies among fetched instructions.
 Other than that, the hazard detection unit, the forwarding unit, and the register file are also more complicated at the circuitry level.
 
-We will illustrate this fact using the following latency data,
+We will illustrate this fact using the following latency data for all of questions in this assignment,
 |                      | IF latency | ID latency | EX latency | MEM latency | WB latency |
 |----------------------|--------|--------|--------|--------|--------|
 | pipelined            |  50 ps | 100 ps |  200ps |  180ps |  190ps |
