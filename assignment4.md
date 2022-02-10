@@ -17,7 +17,8 @@ Due on TODO: See [Submission]?? for details
 ## Updating the DINO CPU Code
 
 ## How This Assignment is Written
-
+In the first part, you will complete the dual-issue CPU design that supports all RISC-V 64-bit integer instructions.
+In the next part, you will get the performance data of different CPU designs, which will be used in the followed part, in which you will reason about the performance data.
 
 ## I/O Constraint
 We are making one major constraint on how you are implementing your CPU.
@@ -28,10 +29,10 @@ Therefore, you must **keep the exact same I/O**.
 You will get errors on Gradescope (and thus no credit) if you modify the I/O.
 
 ## Goals
-- Learning to resolve the data hazards in a dual-issue CPU using forwarding/stalling/flushing.
-- Learning to compare the performance of different CPU designs.
-- Learning to analyze how a workload perform differently different CPU designs.
-- Learning to analyze how software optimizations might affect a CPU performance.
+- Learn to resolve the data hazards in a dual-issue CPU using forwarding/stalling/flushing.
+- Learn to compare the performance of different CPU designs.
+- Learn to analyze how a workload perform differently different CPU designs.
+- Learn to analyze how software optimizations might affect a CPU performance.
 
 ## Glossary
 |Terms| Definitions |
@@ -80,6 +81,9 @@ TODO: add links to Gradescope
 In this part, you will collect the data for the next steps.
 
 Now that we completed three different CPU designs (single-cycle, pipelined, pipelined-dual-issue), we can evaluate and compare their performances on different benchmarks.
+
+## The Cost of Increasingly Complex CPU Designs
+
 
 ## Loop-unrolling
 TODO
