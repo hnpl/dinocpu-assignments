@@ -126,6 +126,8 @@ When PC is divisible by 8, the issue unit will issue two fetched instructions, e
 
 Note that if (PC % 8 == 4), the only the instruction at PC+4 will be issued. (This is due to memory constraint, and it will not affect the forwarding/hazard detection logic).
 
+The above constraints lead to the following property,
+- If `pipeB` has a valid instruction, `pipeA` must not be a load/store/branch/jump.
 
 # Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU
 In this part, you will complete the forwarding unit and the hazard detection unit for the dual-issue pipelined CPU.
