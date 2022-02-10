@@ -47,8 +47,35 @@ Due on TODO: See [Submission]?? for details
 
 
 # Introduction
+![Cute Dino]({{'img/dinocpu/dino-128.png' | relative_url}}) ![Cute Dino]({{'img/dinocpu/dino-128.png' | relative_url}})
+
+In previous assignments, you implemented a full single cycle RISC-V CPU and a full 5-stage pipelined RISC-V CPU.
+Jumping from the single cycle CPU design to the pipelined CPU design was a big step toward exploiting instruction-level parallelism (ILP).
+
+In this assignment, you will explore another big idea of exploiting ILP: multiple-issue.
+Essentially, multiple-issue means the CPU will allow multiple instructions to enter the pipeline at the same time.
+This assignment will focus on dual-issue: upto two instructions can be issued in a cycle.
+You will complete the provided dual-issue pipelined RISC-V CPU by implementing its hazard dection unit and its forwarding unit, and more importantly, you will evaluate and analyze the performance of different CPU designs.
+You will also explore how a compiler can make a trade-off to optimize the performance of software on different hardware.
+
 
 ## Updating the DINO CPU Code
+Before the assignment 3 late due date, the code template for assignment 4 will be on the `lab4` branch.
+The `main` branch will be merged to the `lab4` branch after that.
+
+This step is only necessary if you want to start to work on this assignment before the assignment 3 late due date (2/13/2022 11:59PM PST).
+```
+git pull
+git stash
+git rebase origin/lab4
+git stash pop
+```
+If you work on this assignment after the assignment 3 late due date,
+```
+git pull
+```
+
+Note that you do not need to reuse the code from other assignments for this assignment.
 
 ## How This Assignment is Written
 In the first part, you will complete the dual-issue CPU design that supports all RISC-V 64-bit integer instructions.
