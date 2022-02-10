@@ -1,15 +1,38 @@
+---
+Author: Hoa Nguyen, Jason Lowe-Power
+Editor: Hoa Nguyen
+Title: DINO CPU Assignment 4
+---
+
+DINO CPU Assignment 4: Dual-issue Pipelined CPU: Performance Evaluation and Analysis
+
+Originally from ECS 154B Lab 4, Winter 2022.
+
+Due on TODO: See [Submission]?? for details
+
 # Table of Contents
 
 # Introduction
-
 ## Updating the DINO CPU Code
 ## How This Assignment is Written
 ## I/O Constraint
 ## Goals
+## Glossary
+|Term| |
+|----|-|
+|issue| A CPU issuing an instruction means that the CPU decides that that instruction will enter the pipeline. Issuing happens in the IF stage; however, issuing is different from fetching. At each cycle, by inputting a PC, the imem (instruction memory) will fetch 2 instructions at address of `(PC // 8) * 8`, but the issue unit might not necessary issue both instructions. |
+|commit| A CPU committing an instruction means that that instruction goes through all 5 stages of the pipeline.  |
+|performance| The amount of time it takes for a CPU to run application. |
+|loop unrolling| See Loop-unrolling TODO section. |
 
 # Dual-issue Pipelined CPU Design
 ## Testing Dual-issue Pipelined CPU
-## Debugging Dual-issue Pipelined CPU
+The following commands will run all tests for this assignment,
+```
+Lab4 / test
+```
+## Hints for Debugging Dual-issue Pipelined CPU
+- 
 
 # Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU
 In this part, you will complete the forwarding unit and the hazard detection unit for the dual-issue pipelined CPU.
