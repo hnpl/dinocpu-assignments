@@ -25,7 +25,7 @@ Due on TODO: See [Submission]?? for details
     * [Full Application Traces](#full-application-traces)
     * [Submissions](#submissions)
 * [Part II: Performance Evaluation](#part-ii-performance-evaluation)
-    * [The Cost of Increasingly Complex CPU Designs](#the-cost-of-increasingly-complex-cpu-designs)
+    * [The Trade-offs of Making Increasingly Complex CPU Designs](#the-trade-offs-of-making-increasingly-complex-cpu-designs)
     * [Loop-unrolling](#loop-unrolling)
     * [Collecting Data](#collecting-data)
     * [Question 1](#question-1)
@@ -99,7 +99,8 @@ You will get errors on Gradescope (and thus no credit) if you modify the I/O.
 |Terms| Definitions |
 |----|-|
 |issue| A CPU issuing an instruction means that the CPU decides that that instruction will enter the pipeline. Issuing happens in the IF stage; however, issuing is different from fetching. At each cycle, by inputting a PC, the imem (instruction memory) will fetch 2 instructions at address of `(PC // 8) * 8`, but the issue unit might not necessary issue both instructions. |
-|commit| A CPU committing an instruction means that that instruction goes through all 5 stages of the pipeline.  |
+|commit| A CPU committing an instruction means that that instruction goes through all 5 stages of the pipeline. |
+|IPC| Number of committed instructions per cycle. |
 |performance| The amount of time it takes for a CPU to run application. |
 |loop unrolling| See Loop-unrolling TODO section. |
 
@@ -137,8 +138,27 @@ In this part, you will collect the data for the next steps.
 
 Now that we completed three different CPU designs (single-cycle, pipelined, pipelined-dual-issue), we can evaluate and compare their performances on different benchmarks.
 
-## The Cost of Increasingly Complex CPU Designs
+## The Trade-offs of Making Increasingly Complex CPU Designs
+The dual-issue pipelined CPU design will always require fewer or the same number cycles to complete a program compared the original pipelined CPU.
+The dual-issue CPU can issue upto 2 instructions per cycle, while the original pipelined CPU only issue exactly 1 instruction per cycle.
+Along with the fact that dual-issue and the original pipelined share the same penalty for mispredicted branches and jump instructions as well as the same stalling/flushing mechanism, using the dual-issue design will always result in a speedup compared to the original pipelined design.
 
+However, using the dual-issue design also comes with a cost.
+One of the most notable change of the dual-issue design is that it has a much more complex fetch stage compared to the original pipelined design.
+This caused by complex logics for determining the data dependencies among fetched instructions.
+Other than that, the hazard detection unit, the forwarding unit, and the register file are also more complicated at the circuitry level.
+
+We will illustrate this fact using the following latency data,
+|                      | IF latency | ID latency | EX latency | MEM latency | WB latency |
+|----------------------|--------|--------|--------|--------|--------|
+| pipelined            |  50 ps | 100 ps |  200ps |  180ps |  190ps |
+| pipelined-dual-issue | 220 ps | 140 ps |  200ps |  200ps |  210ps |
+
+|              | latency |
+|--------------|---------|
+| single-cycle |  800 ps |
+
+ps: picoseconds (1 ps = 10^-12 seconds)
 
 ## Loop-unrolling
 TODO
@@ -225,6 +245,7 @@ Since they consume CPU cycles, they are also part of the workload performance.
 This method is called *program profiling*, which helps finding part of a program producing most of time complexity.
 - For program profiling, you might want to write a printf function printing the instructions that are issued to see all the PC of all instructions that ever entered the pipeline.
 You can find an example of how the commit traces are produced near the end of the file `src/main/scala/pipelined/dual-issue.scala`.
+- Note that for branch instructions, the pipelined CPUs would *speculatively* issue the next instructions as if the branch is not taken.
 - You do not have to analyze all characteristics of the workloads (although it would be beneficial to find all aspects of the binary that affect the CPU performance, it is not essential to capture all of them for this assignment).
 An idea or two on what caused each of the speedups and slowdowns would be sufficient for full credits.
 Make sure that the ideas are well-explained.
