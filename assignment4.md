@@ -12,6 +12,40 @@ Due on TODO: See [Submission]?? for details
 
 # Table of Contents
 
+* [Introduction](#introduction)
+    * [Updating the DINO CPU code](#updating-the-dino-cpu-code)
+    * [How This Assignment is Written](#how-this-assignment-is-written)
+    * [I/O Constraint](#io-constraint)
+    * [Goals](#goals)
+    * [Glossary](#glossary)
+* [Dual-issue Pipelined CPU Design](#dual-issue-pipelined-cpu-design)
+* [Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU](#part-i-implementing-forwarding-and-hazard-detection-unit-for-dual-issue-pipelined-cpu)
+    * [Hints](#hints)
+    * [Testing the Dual-issue Pipelined CPU](#testing-the-dual-issue-pipelined-cpu)
+    * [Full Application Traces](#full-application-traces)
+    * [Submissions](#submissions)
+* [Part II: Performance Evaluation](#part-ii-performance-evaluation)
+    * [The Cost of Increasingly Complex CPU Designs](#the-cost-of-increasingly-complex-cpu-designs)
+    * [Loop-unrolling](#loop-unrolling)
+    * [Collecting Data](#collecting-data)
+    * [Question 1](#question-1)
+    * [Question 2](#question-2)
+    * [Question 3](#question-3)
+    * [Hints](#hints-1)
+* [Part III: Performance Analysis](#part-iii-performance-analysis)
+    * [Question 4](#question-4)
+    * [Question 5](#question-5)
+    * [Hints](#hints-2)
+* [Conclusion](#conclusion)
+* [Logistics](#logistics)
+    * [Grading](#grading)
+    * [Submission](#submission)
+        * [Code Portion](#code-portion)
+        * [Written Portion](#written-portion)
+        * [Academic misconduct reminder](#academic-misconduct-reminder)
+* [Hints](#hints-3)
+
+
 # Introduction
 
 ## Updating the DINO CPU Code
@@ -43,13 +77,7 @@ You will get errors on Gradescope (and thus no credit) if you modify the I/O.
 |loop unrolling| See Loop-unrolling TODO section. |
 
 # Dual-issue Pipelined CPU Design
-## Testing Dual-issue Pipelined CPU
-The following commands will run all tests for this assignment,
-```
-Lab4 / test
-```
-## Hints for Debugging Dual-issue Pipelined CPU
-- 
+
 
 # Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU
 In this part, you will complete the forwarding unit and the hazard detection unit for the dual-issue pipelined CPU.
@@ -70,7 +98,7 @@ Lab4 / testOnly dinocpu.FullApplicationsTesterLab4
 Lab4 / testOnly dinocpu.LoopsUnrolledFullApplicationsTesterLab4
 ```
 
-### Full Application Traces
+## Full Application Traces
 TODO: add links to the commit traces
 
 ## Submissions
