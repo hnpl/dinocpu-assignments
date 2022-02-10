@@ -19,6 +19,7 @@ Due on TODO: See [Submission]?? for details
     * [Goals](#goals)
     * [Glossary](#glossary)
 * [Dual-issue Pipelined CPU Design](#dual-issue-pipelined-cpu-design)
+    * [Issue Constraints](#issue-constraints)
 * [Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU](#part-i-implementing-forwarding-and-hazard-detection-unit-for-dual-issue-pipelined-cpu)
     * [Hints](#hints)
     * [Testing the Dual-issue Pipelined CPU](#testing-the-dual-issue-pipelined-cpu)
@@ -105,6 +106,25 @@ You will get errors on Gradescope (and thus no credit) if you modify the I/O.
 |loop unrolling| See Loop-unrolling TODO section. |
 
 # Dual-issue Pipelined CPU Design
+At a high level, the dual-issue pipelined CPU design has two pipelines where each of the pipeline is similar to the original pipelined CPU design.
+This means that we duplicated *almost* all components of the original pipelined CPU design with some exceptions: there is only one NextPC component, one hazard detection unit, and one forwarding unit.
+
+There are two pipelines in the design: `pipeA` and `pipeB`.
+- If there is only one instruction being issued, that instruction will enter `pipeA`, while `pipeB` will be marked as not having any instruction.
+- If there are two instructions being issued, then instruction with address of PC will enter `pipeA`, while the instruction with address of PC+4 will enter `pipeB`.
+This order matters. For example, if both instructions write to the same register and are at the MEM stage, and some instruction at the EX stage needs to read the same register, then only the value in `pipeB` needed to be forwarded to the EX stage.
+The reason is that, from the software's perspective, the instruction at PC+4 should be executed after the instruction at PC.
+
+**Note:** In general, the statement saying "the instruction at PC+4 should be executed after the instruction at PC" is not correct at all time.
+For example, if the instruction at PC is a jump instruction, the next instruction should not be at PC+4.
+However, we will make some constraints on how instructions are issued so that, if the issue unit issues two instructions, then the instruction enterring `pipeB` (which is at PC+4) will be committed after the instruction enterring `pipeA` (which is at PC).
+
+## Issue Constraints
+When PC is divisible by 8, the issue unit will issue two fetched instructions, except for the following cases,
+- If the instruction at PC is a load/store/branch/jump, the instruction at PC+4 will not be issued in the same cycle.
+- If the instruction at PC and the instruction at PC+4 have data dependencies, the instruction at PC+4 will not be issued in the same cycle.
+
+Note that if (PC % 8 == 4), the only the instruction at PC+4 will be issued. (This is due to memory constraint, and it will not affect the forwarding/hazard detection logic).
 
 
 # Part I: Implementing Forwarding and Hazard Detection Unit for Dual-issue Pipelined CPU
@@ -140,8 +160,8 @@ Now that we completed three different CPU designs (single-cycle, pipelined, pipe
 
 ## The Trade-offs of Making Increasingly Complex CPU Designs
 The dual-issue pipelined CPU design will always require fewer or the same number cycles to complete a program compared the original pipelined CPU.
-The dual-issue CPU can issue upto 2 instructions per cycle, while the original pipelined CPU only issue exactly 1 instruction per cycle.
-Along with the fact that dual-issue and the original pipelined share the same penalty for mispredicted branches and jump instructions as well as the same stalling/flushing mechanism, using the dual-issue design will always result in a speedup compared to the original pipelined design.
+This comes from the fact that the dual-issue CPU can issue upto 2 instructions per cycle, while the original pipelined CPU only issue exactly 1 instruction per cycle.
+Another reason is that the dual-issue and the original pipelined share the same penalty for mispredicted branches and jump instructions as well as the same stalling/flushing mechanism.
 
 However, using the dual-issue design also comes with a cost.
 One of the most notable change of the dual-issue design is that it has a much more complex fetch stage compared to the original pipelined design.
@@ -150,9 +170,9 @@ Other than that, the hazard detection unit, the forwarding unit, and the registe
 
 We will illustrate this fact using the following latency data for all of questions in this assignment,
 |                      | IF latency | ID latency | EX latency | MEM latency | WB latency |
-|----------------------|--------|--------|--------|--------|--------|
-| pipelined            |  50 ps | 100 ps |  200ps |  180ps |  190ps |
-| pipelined-dual-issue | 220 ps | 140 ps |  200ps |  200ps |  210ps |
+|----------------------|------------|------------|------------|-------------|------------|
+| pipelined            |      50 ps |     100 ps |      200ps |       180ps |      190ps |
+| pipelined-dual-issue |     220 ps |     140 ps |      200ps |       200ps |      210ps |
 
 |              | latency |
 |--------------|---------|
@@ -197,6 +217,7 @@ For this question, you will be creating a graph presenting the *performance* (i.
 For this question, you will be creating a table presenting the speedups of the new CPU design (pipelined-dual-issue) compared to the old CPU design (pipelined) for each workload, both normal and unrolled.
 
 ## Hints
+- For calculation in all questions, [this data should be used](#the-trade-offs-of-making-increasingly-complex-cpu-designs).
 - For each of Question 1 and Question 2, there should be 36 data points to present, e.g., for the `multiply` workload,
   - `multiply.riscv` + `single-cycle`
   - `multiply.riscv` + `pipelined`
