@@ -183,7 +183,22 @@ We will illustrate this fact using the following latency data for all of questio
 ps: picoseconds (1 ps = 10^-12 seconds)
 
 ## Loop-unrolling
-TODO
+Loop unrolling is a compiler optimization technique transforming a loop from perform one original iteration-worth of work to multiple original iterations-worth of work per new loop iteration.
+
+An unrolled loop would looks like this in a high-level language,
+```C
+// original loop                 | // unrolled loop
+for (int i = 0; i < 16; i++)     | for (int i = 0; i < 4; i+=4)
+{                                | {
+    arr[i] = c[i] + 1;           |     arr[i] = c[i] + 1;
+}                                |     arr[i+1] = c[i+1] + 1;
+                                 |     arr[i+2] = c[i+2] + 1;
+                                 |     arr[i+3] = c[i+3] + 1;
+                                 | }
+```
+You can manually unroll a loop like the above, or you can pass the option `-funroll-loops` or `-funroll-all-loops` to `gcc` to tell the compiler to unroll the loops.
+[The two loop unrolling options work differently](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
+`-funroll-loops` would only unroll a loop if the number of iterations of the loop is known at the compile time, while `-funroll-all-loops` would attempt to unroll all loops regardless whether the number of iterations is known.
 
 ## Collecting Data
 The following command will simulate a binary with a CPU type and will output the number of simulated cycles at the end of simulation,
