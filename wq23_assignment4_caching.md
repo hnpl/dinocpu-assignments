@@ -7,3 +7,45 @@ Title: DINO CPU Assignment 4
 DINO CPU Assignment 4: The Why of Caching.
 
 Originally from ECS 154B Lab 4, Winter 2023.
+
+# Introduction
+
+Caching is among the greatest ideas in computing.
+In fact, the concept is so great that it appears in many fields of computer science.
+Examples can be found in from almost all hardware architectures, such as the use of translation lookup buffers (TLBs) or the use of memory cache system, to various software designs, such as DNS caching or web caching.
+
+In essence, the idea of caching is that, when the cost of acquiring data is high, the acquired data can be saved in a cache, which incurs a lower data acquiring cost, so that, the next time the piece of data is requested, the requestor can retrieve the data from the cache rather than going through the whole computation again.
+If the piece of data is frequently requested, the cache would bring down the average cost of acquiring that piece of data.
+
+However, caching does not inherently improve the performance of a system as an infinite cache system does not exist.
+Due to physical and designing constraints, such as area, power, and latency, designing a performant memory cache in a CPU core imposes a huge challenge to the designers.
+In this assignment, we will investigate the performance of a computer system with a pipelined CPU core, a memory system, and various cache design decisions.
+
+The assignment is designed as follows: we will introduce each of the components of the computer system that we are going to investigate, then we will introduce the benchmarks that will be subsequently used for performance evaluation and performance analysis.
+In terms of implementation, most of the system is implemented.
+However, we will ask you to complete the hazard detection unit for the new pipelined CPU.
+
+# Learning Objectives
+
+# The Computer System
+
+## The Non Combinational Pipelined CPU Core
+
+## The Memory System
+
+## The Memory Cache System
+
+# The Benchmarks
+
+# Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU
+
+# Part II: Performance Evaluation
+
+# Part III: Performance Analysis
+
+# Conclusion
+
+# Logistics
+
+# Extra Credits
+
