@@ -59,10 +59,11 @@ when the request is complete.
 # The Computer System
 
 - CPU: We will use the same pipelined CPU that we built in the assignment 3.
-However, the memory interface is slightly tweaked to support memory devices with
-non-deterministic latency. Note that both instructions and data come from memory
-devices. As a result, extra care should be taken to ensure correct instructions
-enter the pipelined CPU, as well as the correct data is received.
+However, the memory interface is slightly tweaked to support memory devices
+of which the latency of a memory request is unknown to the CPU [1]. Note that both
+instructions and data come from memory devices. As a result, extra care should
+be taken to ensure correct instructions enter the pipelined CPU, as well as
+the correct data is received.
 
 - L1 Cache:
 
@@ -81,3 +82,20 @@ enter the pipelined CPU, as well as the correct data is received.
 
 # Extra Credits
 
+# Footnotes
+
+[1] This is not because the latency of a memory device is hidden from the CPU.
+This is a complication caused by internal activities of a memory device that is
+abstracted away by the CPU/Memory interface.
+This problem is not apparent in a 1-level cache system. However, it might be
+a problem in two or more level cache system.
+For example, if we have a two-level cache sytem, when there is a miss in both
+L1 and L2.
+When the L1 receives the data, it might evict an entry from L1 to L2.
+L1 sends the response back to the CPU as soon as L2 receives the evict request.
+Upon the next data memory access from the CPU, and if there is an L1 miss, L2
+might still be busy with the previous evict request.
+As a result, there's no single value describe the latency of a cache miss and
+a cache hit as those values are dependent on the state of the cache/memory
+devices, which are unknown until the runtime, and are varied from a workload
+to another workload.
