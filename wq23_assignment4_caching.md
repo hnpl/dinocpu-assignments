@@ -44,15 +44,27 @@ However, we will ask you to complete the hazard detection unit for the new pipel
 
 # Learning Objectives
 
+# Glossary
+
+- Memory Latency: The time between when a memory device receives a request
+and when it completes the request.
+
+- Memory Hierarchy: A series of memory devices that, the lower level a memory
+device is, the higher memory latency it has.
+
+- Memory Transaction: A memory device can send a *memory request* to its lower
+next memory device, which will send back the corresponding *memory response*
+when the request is complete.
+
 # The Computer System
 
-## The Non Combinational Pipelined CPU Core
+- CPU: We will use the same pipelined CPU that we built in the assignment 3.
+However, the memory interface is slightly tweaked to support memory devices with
+non-deterministic latency. Note that both instructions and data come from memory
+devices. As a result, extra care should be taken to ensure correct instructions
+enter the pipelined CPU, as well as the correct data is received.
 
-## The Memory Cache System
-
-### The Least-Recently Used (LRU) Replacement Policy
-
-## The Memory System
+- L1 Cache:
 
 
 # The Benchmarks
