@@ -8,13 +8,30 @@ DINO CPU Assignment 4: The Why of Caching.
 
 Originally from ECS 154B Lab 4, Winter 2023.
 
+# Table of Contents
+* [Table of Contents](#table-of-contents)
+* [Introduction](#introduction)
+* [Learning Objectives](#learning-objectives)
+* [The Computer System](#the-computer-system)
+  * [The Non Combinational Pipelined CPU Core](#the-non-combinational-pipelined-cpu-core)
+  * [The Memory Cache System](#the-memory-cache-system)
+    * [The Least-Recently Used (LRU) Replacement Policy](#the-least-recently-used-lru-replacement-policy)
+  * [The Memory System](#the-memory-system)
+* [The Benchmarks](#the-benchmarks)
+* [Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU](#part-i-implementing-the-hazard-detection-unit-for-non-combinational-pipelined-cpu)
+* [Part II: Performance Evaluation](#part-ii-performance-evaluation)
+* [Part III: Performance Analysis](#part-iii-performance-analysis)
+* [Logistics](#logistics)
+* [Conclusion](#conclusion)
+* [Extra Credits](#extra-credits)
+
 # Introduction
 
 Caching is among the greatest ideas in computing.
 In fact, the concept is so great that it appears in many fields of computer science.
 Examples can be found in from almost all hardware architectures, such as the use of translation lookup buffers (TLBs) or the use of memory cache system, to various software designs, such as DNS caching or web caching.
 
-In essence, the idea of caching is that, when the cost of acquiring data is high, the acquired data can be saved in a cache, which incurs a lower data acquiring cost, so that, the next time the piece of data is requested, the requestor can retrieve the data from the cache rather than going through the whole computation again.
+In essence, the idea of caching is that, when the cost of acquiring data is high and the cost of duplicating the data is low, the acquired data can be saved in a cache, which incurs a lower data acquiring cost, so that, the next time the piece of data is requested, the requestor can retrieve the data from the cache rather than going through the whole computation again.
 If the piece of data is frequently requested, the cache would bring down the average cost of acquiring that piece of data.
 
 However, caching does not inherently improve the performance of a system as an infinite cache system does not exist.
@@ -31,9 +48,12 @@ However, we will ask you to complete the hazard detection unit for the new pipel
 
 ## The Non Combinational Pipelined CPU Core
 
+## The Memory Cache System
+
+### The Least-Recently Used (LRU) Replacement Policy
+
 ## The Memory System
 
-## The Memory Cache System
 
 # The Benchmarks
 
@@ -43,9 +63,9 @@ However, we will ask you to complete the hazard detection unit for the new pipel
 
 # Part III: Performance Analysis
 
-# Conclusion
-
 # Logistics
+
+# Conclusion
 
 # Extra Credits
 
