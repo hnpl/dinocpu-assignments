@@ -85,8 +85,8 @@ the correct data is received.
 # Footnotes
 
 [1] This is not because the latency of a memory device is hidden from the CPU.
-This is a complication caused by internal activities of a memory device that is
-abstracted away by the CPU/Memory interface.
+This is a complication caused by internal activities of a memory device that
+are abstracted away by the CPU/Memory interface.
 This problem is not apparent in a 1-level cache system. However, it might be
 a problem in two or more level cache system.
 For example, if we have a two-level cache sytem, when there is a miss in both
@@ -95,7 +95,7 @@ When the L1 receives the data, it might evict an entry from L1 to L2.
 L1 sends the response back to the CPU as soon as L2 receives the evict request.
 Upon the next data memory access from the CPU, and if there is an L1 miss, L2
 might still be busy with the previous evict request.
-As a result, there's no single value describe the latency of a cache miss and
-a cache hit as those values are dependent on the state of the cache/memory
-devices, which are unknown until the runtime, and are varied from a workload
-to another workload.
+As a result, there's no single value describe each of a cache miss latency and
+a cache hit latency as those values are dependent on the state of the
+cache/memory devices, which are unknown until the runtime, and are varied from
+a workload to another workload.
