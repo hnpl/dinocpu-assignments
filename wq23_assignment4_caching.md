@@ -85,7 +85,8 @@ with that was least recently accessed.
 
 We will use the same pipeline that we built in the assignment 3.
 However, the memory interface is slightly tweaked to support memory devices
-of which the latency of a memory request is unknown to the core [1].
+of which the latency of a memory request is unknown to the core
+[\[1\]](#cache-miss-latency-might-vary).
 Note that both instructions and data come from memory devices.
 As a result, extra care should be taken to ensure correct instructions enter
 the pipeline, as well as the correct data are received.
@@ -101,7 +102,7 @@ L1 Cache: The L1 Cache consists of two components: an L1 Instruction Cache
 (L1I) and L1 Data Cache (L1D).
 The Instruction Cache is optimized for read-only accesses.
 The Data Cache supports both read and write operations.
-Each of the L1I and L1D is 4-way associtive cache of size 256 bytes.
+Each of the L1I and L1D is 4-way associtive cache having 32 entries.
 The cache block size is 8 bytes.
 Each cache uses the LRU replacement policy.
 
@@ -190,26 +191,31 @@ An example graph will be discussed in during one of the discussion sessions.
 
 ## Question 1 (5 points)
 
-For this question, you will be reporting the number of dynamic instructions of
-the `stream-64-stride-1-noverify.riscv` and the
-`stream-64-stride-4-noverify.riscv`.
+Determine the number of dynamic instructions of the
+`stream-64-stride-1-noverify.riscv` and the `stream-64-stride-4-noverify.riscv`.
+
+**Hint:** Single cycle CPU and pipelined CPU should have exactly the same number
+of executed instructions for each binary.
 
 ## Question 2 (10 points)
 
-For this question, you will be creating a graph presenting the CPI of the Non
-Combinational CPU in 4 systems described above with the
-`stream-64-stride-1-noverify.riscv` benchmark and the
+Create a graph representing the CPI of the Non Combinational CPU in 4 systems described
+above with the `stream-64-stride-1-noverify.riscv` benchmark and the
 `stream-64-stride-4-noverify.riscv` benchmark.
 The X-axis should be grouped by systems.
 
 ## Question 3 (10 points)
 
-(TODO:graph) Determine the effective bandwidth of each of the systems on each workload.
+Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
+Determine the effective bandwidth of each of the systems when running each of
+`stream-64-stride-1-noverify.riscv` and `stream-64-stride-4-noverify.riscv` benchmarks
+with system 4.
 
 ## Question 4 (10 points)
 
-(TODO:graph)
-- L1 data / inst ratio system 4
+Create a graph representing the L1 data cache hit ratio and the L1 instruction cache hit
+ratio when running each of `stream-64-stride-1-noverify.riscv` and
+`stream-64-stride-4-noverify.riscv` benchmarks with system 4.
 
 # Part III: Performance Analysis
 
@@ -221,16 +227,44 @@ impact on performance? Explain why using the data from part II.
 ## Question 6 (25 points)
 
 From the data from Part II, you should see system 4 performs better
-when running `stream-64-stride-1-noverify.riscv` compared to
-`stream-64-stride-4-noverify.riscv`. Explain why using data from part II.
+when running `stream-64-stride-1-noverify.riscv` compared to running
+`stream-64-stride-4-noverify.riscv`. Explain why using the data from part II.
 
 # Logistics
 
 # Conclusion
 
+The simple benchmarks should reveal the effectiveness of the cache system on
+different program behaviours.
+Having a cache system, even a simple one like in the DINO CPU, drastically
+improves the performance of the system on a lot (but not all) of real world
+applications.
+That is why even a low-end chip has some short of a cache system.
+
+However, a cache system does not always improve the performance for all workloads.
+In fact, by introducing a cache system, we are making the latency of pulling
+a piece of data from memory higher.
+There are algorithms that are naturally cache unfriendly, and it is
+still an open question on whether the cache system should be able to adapt to
+a variety algorithms, or the software developers should reprogram the program
+to maximize the utilization of the cache system.
+
+As you can see from the assignment, the timing within a computer system is
+significantly dependent on the behaviour of workload itself, and a small change
+in a system, like a slightly larger cache size, might significantly change
+the performance of a system.
+Thus, performance evaluation of a new system is usually heavily relied on simulations.
+For the next assignment, you'll investigate the performance of a system with an
+even more sophisticated cache system where the cache system has to handle accesses
+from multiple CPU cores while having to ensure the correctness of the program.
+We will use another simulator, gem5, which comes with a variety of cache coherency
+protocols allowing investigating the performance of a multiple cores system.
+
 # Extra Credits
 
 # Footnotes
+
+## Cache miss latency might vary
 
 [1] This is not because the latency of a memory device is hidden from the CPU.
 This is a complication caused by internal activities of a memory device that
