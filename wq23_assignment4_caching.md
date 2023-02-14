@@ -27,15 +27,17 @@ Originally from ECS 154B Lab 4, Winter 2023.
 
 # Introduction
 
-Caching is among the greatest ideas in computing.
-In fact, the concept is so great that it appears in many fields of computer science.
+Caching is among the most influential ideas in computing.
+In fact, the concept reaches many fields of computer science.
 Examples can be found in from almost all hardware architectures, such as the use of translation lookup buffers (TLBs) or the use of memory cache system, to various software designs, such as DNS caching or web caching.
 
 In essence, the idea of caching is that, when the cost of acquiring data is high and the cost of duplicating the data is low, the acquired data can be saved in a cache, which incurs a lower data acquiring cost, so that, the next time the piece of data is requested, the requestor can retrieve the data from the cache rather than going through the whole computation again.
+In other words, we are trading the cost of acquiring the data with (TODO).
 If the piece of data is frequently requested, the cache would bring down the average cost of acquiring that piece of data.
 
 However, caching does not inherently improve the performance of a system as an infinite cache system does not exist.
-Due to physical and designing constraints, such as area, power, and latency, designing a performant memory cache in a CPU core imposes a huge challenge to the designers.
+Due to physical constraints, such as area, power, and latency, the cache closer to the core tends to have drastically smaller capacity than the ones further away from the core.
+Thus, designing a performant memory cache in a CPU core imposes a huge challenge to the designers.
 In this assignment, we will investigate the performance of a computer system with a pipelined CPU core, a memory system, and various cache design decisions.
 
 The assignment is designed as follows: we will introduce each of the components of the computer system that we are going to investigate, then we will introduce the benchmarks that will be subsequently used for performance evaluation and performance analysis.
@@ -239,7 +241,8 @@ different program behaviours.
 Having a cache system, even a simple one like in the DINO CPU, drastically
 improves the performance of the system on a lot (but not all) of real world
 applications.
-That is why even a low-end chip has some short of a cache system.
+That is why even a low-end chip has some short of a cache system, and why
+a high-end chip tends to dedicate a lot of its area for the cache system.
 
 However, a cache system does not always improve the performance for all workloads.
 In fact, by introducing a cache system, we are making the latency of pulling
