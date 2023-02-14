@@ -235,15 +235,13 @@ when running `stream-64-stride-1-noverify.riscv` compared to
 [1] This is not because the latency of a memory device is hidden from the CPU.
 This is a complication caused by internal activities of a memory device that
 are abstracted away by the CPU/Memory interface.
-This problem is not apparent in a 1-level cache system. However, it might be
-a problem in two or more level cache system.
-For example, if we have a two-level cache sytem, when there is a miss in both
-L1 and L2.
-When the L1 receives the data, it might evict an entry from L1 to L2.
-L1 sends the response back to the CPU as soon as L2 receives the evict request.
-Upon the next data memory access from the CPU, and if there is an L1 miss, L2
-might still be busy with the previous evict request.
-As a result, there's no single value describe each of a cache miss latency and
-a cache hit latency as those values are dependent on the state of the
-cache/memory devices, which are unknown until the runtime, and are varied from
-a workload to another workload.
+Consider a cache miss in an L1D cache which causes the L1D cache to pull a 
+cache block from memory to L1D cache.
+However, since the cache is full, it needs to evict an entry to memory.
+Note that, the cache sends to response to the CPU as soon as it sends the
+eviction request to memory.
+In the next instruction, there could be an L1D cache miss again.
+However, the memory might be busy with the previous eviction request, so the
+L1D cache must wait for the memory to complete that request before it can
+pull a cache block to memory.
+Thus, the cache miss latency might vary from access to access.
