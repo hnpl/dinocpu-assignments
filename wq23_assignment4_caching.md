@@ -204,22 +204,25 @@ The X-axis should be grouped by systems.
 
 ## Question 3 (10 points)
 
-- Effective Bandwidth
+(TODO:graph) Determine the effective bandwidth of each of the systems on each workload.
 
 ## Question 4 (10 points)
 
+(TODO:graph)
 - L1 data / inst ratio system 4
 
 # Part III: Performance Analysis
 
-## Question 5 (15 points)
+## Question 5 (20 points)
 
 Between data cache and instruction cache, do you think which cache has more
 impact on performance? Explain why using the data from part II.
 
-## Question 6 (20 points)
+## Question 6 (25 points)
 
-From the data from Part II, you should see that `stream-64-stride-1-noverify.riscv`
+From the data from Part II, you should see system 4 performs better
+when running `stream-64-stride-1-noverify.riscv` compared to
+`stream-64-stride-4-noverify.riscv`. Explain why using data from part II.
 
 # Logistics
 
