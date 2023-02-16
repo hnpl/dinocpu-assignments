@@ -100,6 +100,8 @@ with that was least recently accessed.
 
 # The Computer System
 
+(TODO: add diagrams illustrating the system differences)
+
 ## The Core
 
 We will use the same pipeline that we built in the assignment 3.
@@ -191,15 +193,24 @@ pipelined implentation. The `stream-64-stride-1-noverify.riscv`
 and `stream-64-stride-4-noverify.riscv` are used for performance
 evaluation.
 
+(TODO: C-code <-> RISCV assembly map)
+
 # Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU
 
 In this part, you will complete the hazard detection unit for the non combinational
 pipelined CPU in `components/hazardnoncombin.scala`.
 
+## The new memory interface
+
+(TODO: add a contract between CPU and the Mem Interface)
+
+(TODO: diagram of the new interface)
+
 ## Updating the Pipelined CPU
 
 The DINO CPU have a new memory interface for both `imem` and `dmem` for this
 assignment.
+
 The code for the Non Combination Pipelined CPU is mostly the same as the Pipelined CPU.
 However, we are going to use the `HazardUnitNonCombin` rather than `HazardUnit`.
 
@@ -281,6 +292,8 @@ described above with the `stream-64-stride-1-noverify.riscv` benchmark and the
 `stream-64-stride-4-noverify.riscv` benchmark.
 The X-axis should be grouped by systems.
 
+(TODO: add example diagram)
+
 ## Question 3 (10 points)
 
 Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
@@ -313,6 +326,91 @@ when running `stream-64-stride-1-noverify.riscv` compared to running
 `stream-64-stride-4-noverify.riscv`. Explain why using the data from part II.
 
 # Logistics
+## Grading
+Part I will be automatically graded on Gradescope.
+See the Submission section for more details.
+| Part                | Percentage |
+|---------------------|------------|
+| Part 4.1            |        20% |
+| Part 4.2 Question 1 |         5% |
+| Part 4.2 Question 2 |        10% |
+| Part 4.2 Question 3 |        10% |
+| Part 4.2 Question 4 |        10% |
+| Part 4.3 Question 5 |        20% |
+| Part 4.3 Question 6 |        25% |
+| Extra Credits       |        10% |
+
+## Submission
+**Warning:** read the submission instructions carefully. Failure to adhere to the instructions will result in a loss of points.
+
+### Code Portion
+You will upload the following files to Gradescope on the `Assignment 4 - Code Portion` assignment,
+- `src/main/scala/pipelined/cpu-noncombin.scala`
+
+Once uploaded, Gradescope will automatically download and run your code.
+This should take less than 30 minutes.
+For each part of the assignment, you will receive a grade.
+If all of your tests are passing locally, they should also pass on Gradescope unless you made changes to the I/O, which you are not allowed to do.
+
+**Note:** Make sure that you comment out or remove all printing statements in your submissions.
+There are a lot of long tests for this assignment.
+The auto-grader might fail complete grading within the allocated time if there are too many output statements.
+(Outputting to `stdout/stderr` is very costly time-wise!)
+
+### Written Portion
+You will upload your answers for the `Assignment 4 - Written Portion` assignment to Gradescope.
+Please upload a separate page for each answer!
+Additionally, I believe Gradescope allows you to circle the area with your final answer.
+Make sure to do this!
+
+We will not grade any questions for which we are unable to read.
+Be sure to check your submission to make sure it's legible, right-side-up, etc.
+
+### Academic misconduct reminder
+You are to work on this project **individually**.
+You may discuss *high level concepts* with one another (e.g., talking about the diagram), but all work must be completed on your own.
+
+**Remember, DO NOT POST YOUR CODE PUBLICLY ON GITHUB!**
+Any code found on GitHub that is not the base template you are given will be reported to SJA.
+If you want to sidestep this problem entirely, don't create a public fork and instead create a private repository to store your work.
+GitHub now allows everybody to create unlimited private repositories for up to three collaborators, and you shouldn't have any collaborators for your code for this assignment.
+
+## Hints
+- **Start early!** Completing part 4.1 is essential for the next parts.
+- If you need help, come to office hours for the TAs, or post your questions on Piazza.
+
+
+# Extra Credits (10 points)
+
+Improve the performance of the non combination pipelined CPU when running *any* of
+application in the Full Application tests and their `-loops-unrolled` variants.
+You can find the tests [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1096)
+and [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1178).
+
+The new CPU performance should match one of the following cases,
+1. General performance improvement accross most full application tests.
+It's okay to have a marginal performance improvement in this case.
+2. The CPU performs especially well (>1.2x speedup) on a couple of full applications,
+while suffers slowdowns on other full applications. Those designs are called
+application accelerators.
+
+Constraints:
+- You are not allowed to modify the latency or capacity of the existing memory
+components.
+- You are also not allowed to change the memory hierarchy, such as adding another
+level of cache.
+
+However, you can make any changes to the core such as adding more component to the core.
+You also can change the internal of the memory components, such as changning the
+cache replacement policy, or allowing the memory interface to send a response and
+receive a request within the same cycle, or optimize the state diagram of the cache
+component.
+
+To submit the extra credits portion, email either TAs or the instruction with the
+following files,
+- The zip file containing all files that you modified.
+- A pdf report describing what you did to improve the performance of the CPU, and
+the speedups/slowdowns achieved from the Full Application tests.
 
 # Conclusion
 
@@ -373,38 +471,6 @@ program.
 We will use another simulator, gem5, which comes with a variety of cache
 coherency protocols allowing investigating the performance of a multiple cores
 system.
-
-# Extra Credits (10 points)
-
-Improve the performance of the non combination pipelined CPU when running *any* of
-application in the Full Application tests and their `-loops-unrolled` variants.
-You can find the tests [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1096)
-and [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1178).
-
-The new CPU performance should match one of the following cases,
-1. General performance improvement accross most full application tests.
-It's okay to have a marginal performance improvement in this case.
-2. The CPU performs especially well (>1.2x speedup) on a couple of full applications,
-while suffers slowdowns on other full applications. Those designs are called
-application accelerators.
-
-Constraints:
-- You are not allowed to modify the latency or capacity of the existing memory
-components.
-- You are also not allowed to change the memory hierarchy, such as adding another
-level of cache.
-
-However, you can make any changes to the core such as adding more component to the core.
-You also can change the internal of the memory components, such as changning the
-cache replacement policy, or allowing the memory interface to send a response and
-receive a request within the same cycle, or optimize the state diagram of the cache
-component.
-
-To submit the extra credits portion, email either TAs or the instruction with the
-following files,
-- The zip file containing all files that you modified.
-- A pdf report describing what you did to improve the performance of the CPU, and
-the speedups/slowdowns achieved from the Full Application tests.
 
 # Footnotes
 
