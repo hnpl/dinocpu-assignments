@@ -63,8 +63,6 @@ In terms of implementation, most of the system is implemented.
 However, we will ask you to complete the hazard detection unit for the new
 pipelined CPU.
 
-# Learning Objectives
-
 # Glossary
 
 - Core/CPU terminology: Technically, the cache system resides on a CPU. We
@@ -321,8 +319,8 @@ when running `stream-64-stride-1-noverify.riscv` compared to running
 The assignment should show that, on a realistic setup, it is very hard to
 keep all stages of the 5-stage pipeline busy when every memory access is
 expensive.
-Even with fast caches, keeping the IPC for this pipeline close to 1.0 is
-unattainable if you want to keep the CPU frequency high.
+Even with fast caches, keeping the IPC for this pipeline close to the ideal 1.0
+is unattainable if you want to keep the CPU frequency high.
 
 On the hardware/software interaction side, the simple benchmarks should reveal
 the effectiveness of the cache system on different program behaviours.
