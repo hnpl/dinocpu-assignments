@@ -195,6 +195,63 @@ evaluation.
 
 # Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU
 
+In this part, you will complete the hazard detection unit for the non combinational
+pipelined CPU in `components/hazardnoncombin.scala`.
+
+## Updating the Pipelined CPU
+
+The DINO CPU have a new memory interface for both `imem` and `dmem` for this
+assignment.
+The code for the Non Combination Pipelined CPU is mostly the same as the Pipelined CPU.
+However, we are going to use the `HazardUnitNonCombin` rather than `HazardUnit`.
+
+The non combinational CPU scala file will be uploaded after the assignment 3's late
+due date.
+In the mean time, you can reuse code in assignment 3 with a few necessary
+modifications in `pipelined/cpu-noncombin.scala`,
+- Wiring the inputs/outputs of the `HazardUnitNonCombin` accordingly.
+- Setting the imem's valid signal to true. 
+- Setting the dmem's valid signal to true only when the core sends a memory request to
+data memory.
+
+## Hints
+
+- The insrtuction outputted by imem is only correct when and only when
+imem's good signal is 1.
+- Similarly, the readdata outputted by dmem is only correct when and only when
+dmem's good signal is 1.
+- There's no new control hazard or new data hazard. We are modifying the hazard unit
+because we can stall and flush stage registers using the hazard unit.
+- It's easier to start with making sure only correct instructions enter the pipeline.
+Meaning, only advance an instruction from IF stage to ID stage when imem's good signal
+is set.
+- There are multiple ways of handling control hazards and data dependencies when
+timing involves. You can follow discussion sessions for suggested ways. However, the
+suggestions might not be the optimal ways. It is encouraged to discuss about dealing
+with timing in the pipeline with your peers/TAs/instructor. You do have to write
+the code yourself, however.
+- There's no guarantee in terms of memory request latency when there is a cache miss.
+Therefore, the CPU should solely rely on ready/good signals to decide when to send a
+memory request and to receive a memory response. Explaination for those signals can be
+found in the discussions slides.
+
+## Testing the Non Combinational Pipelined CPU
+
+```scala
+Lab4 / testOnly dinocpu.SmallTestsTesterLab4
+Lab4 / testOnly dinocpu.FullApplicationsTesterLab4
+```
+
+**Notes:**
+
+- For `SmallTestsTesterLab4` tests: It is expected that some of the store tests
+(ones start with `s` prefix) will fail because there are data in the cache that
+are not written back to the RAM yet! Those store tests only check the data in
+RAM rather than in cache, hence the test failures.
+- For `FullApplicationsTesterLab4` tests: This test suite includes
+`stream-64-stride-1.riscv` and `stream-64-stride-4.riscv`, which are used to ensure
+the benchmarks we used in Part II and Part III run correctly.
+
 # Part II: Performance Evaluation
 
 For this assignment, we will consider 4 systems,
@@ -261,8 +318,14 @@ when running `stream-64-stride-1-noverify.riscv` compared to running
 
 # Conclusion
 
-The simple benchmarks should reveal the effectiveness of the cache system on
-different program behaviours.
+The assignment should show that, on a realistic setup, it is very hard to
+keep all stages of the 5-stage pipeline busy when every memory access is
+expensive.
+Even with fast caches, keeping a CPI for this pipeline close to 1.0 is
+unattainable if you want to keep the CPU frequency high.
+
+On the hardware/software interaction side, the simple benchmarks should reveal
+the effectiveness of the cache system on different program behaviours.
 Having a cache system, even a simple one like in the DINO CPU, drastically
 improves the performance of the system on a lot (but not all) of real world
 applications.
@@ -278,7 +341,22 @@ still an open question on whether the cache system should be able to adapt to
 a variety algorithms, or the software developers should reprogram the program
 to maximize the utilization of the cache system.
 
-As you can see from the assignment, the timing within a computer system is
+Not only the 5-stage pipeline suffers from the problem of memory being
+slower than the core.
+To keep the pipeline as busy as possible, modern architectures have a fetch
+stage with ability to fetch and issue multiple instructions at a time, and
+speculatively fetches instructions to instruction cache, and fetches data
+to data cache.
+Those technique, along with multi-issue and multi-way execution, are for
+exploiting ILP.
+However, exploiting ILP can only help improving the performance so much
+until the CPU has to run a memory-intensive applications.
+In the next assignment, you will explore a case where, even though the
+applications are memory-intensive, if the data can be independently processed,
+there are DLP techniques exist in hardware that helps increasing the throughput
+of memory accesses to hide the high memory latency.
+
+On the other hand, as you can see from the assignment, the timing within a computer system is
 significantly dependent on the behaviour of workload itself, and a small change
 in a system, like a slightly larger cache size, might significantly change
 the performance of a system.
