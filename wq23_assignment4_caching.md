@@ -29,20 +29,39 @@ Originally from ECS 154B Lab 4, Winter 2023.
 
 Caching is among the most influential ideas in computing.
 In fact, the concept reaches many fields of computer science.
-Examples can be found in from almost all hardware architectures, such as the use of translation lookup buffers (TLBs) or the use of memory cache system, to various software designs, such as DNS caching or web caching.
+Examples can be found in from almost all hardware architectures, such as the
+use of translation lookup buffers (TLBs) or the use of memory cache system, to
+various software designs, such as DNS caching or web caching.
 
-In essence, the idea of caching is that, when the cost of acquiring data is high and the cost of duplicating the data is low, the acquired data can be saved in a cache, which incurs a lower data acquiring cost, so that, the next time the piece of data is requested, the requestor can retrieve the data from the cache rather than going through the whole computation again.
-In other words, we are trading the cost of acquiring the data with (TODO).
-If the piece of data is frequently requested, the cache would bring down the average cost of acquiring that piece of data.
+In essence, the idea of caching is that, when the cost of acquiring data is
+high and the cost of duplicating the data is low, the acquired data can be
+saved in a cache, which incurs a lower data acquiring cost, so that, the next
+time the piece of data is requested, the requestor can retrieve the data from
+the cache rather than going through the whole computation again.
+In other words, we are trading the cost of acquiring the data with some memory
+capacity.
+If the piece of data is frequently requested, the cache would bring down the
+average cost of acquiring that piece of data.
 
-However, caching does not inherently improve the performance of a system as an infinite cache system does not exist.
-Due to physical constraints, such as area, power, and latency, the cache closer to the core tends to have drastically smaller capacity than the ones further away from the core.
-Thus, designing a performant memory cache in a CPU core imposes a huge challenge to the designers.
-In this assignment, we will investigate the performance of a computer system with a pipelined CPU core, a memory system, and various cache design decisions.
+However, caching does not inherently improve the performance of a system.
+Caching adds an extra cost of querying for the existence of data in the cache,
+and since the capacity of a cache is limited, the cache system needs extra
+work to maintain the entries in the cache.
+Due to physical constraints, such as area, power, and latency, the cache closer
+to the core tends to have drastically smaller capacity than the ones further
+away from the core.
+Thus, designing a performant memory cache in a CPU core imposes a huge
+challenge to the designers.
 
-The assignment is designed as follows: we will introduce each of the components of the computer system that we are going to investigate, then we will introduce the benchmarks that will be subsequently used for performance evaluation and performance analysis.
+In this assignment, we will investigate the performance of a computer system
+with a pipelined CPU core, a memory system, and various cache design decisions.
+The assignment is designed as follows: we will introduce each of the components
+of the computer system that we are going to investigate, then we will introduce
+the benchmarks that will be subsequently used for performance evaluation and
+performance analysis.
 In terms of implementation, most of the system is implemented.
-However, we will ask you to complete the hazard detection unit for the new pipelined CPU.
+However, we will ask you to complete the hazard detection unit for the new
+pipelined CPU.
 
 # Learning Objectives
 
@@ -194,15 +213,16 @@ An example graph will be discussed in during one of the discussion sessions.
 ## Question 1 (5 points)
 
 Determine the number of dynamic instructions of the
-`stream-64-stride-1-noverify.riscv` and the `stream-64-stride-4-noverify.riscv`.
+`stream-64-stride-1-noverify.riscv` and the
+`stream-64-stride-4-noverify.riscv`.
 
-**Hint:** Single cycle CPU and pipelined CPU should have exactly the same number
-of executed instructions for each binary.
+**Hint:** Single cycle CPU and pipelined CPU should have exactly the same
+amount of executed instructions for each binary.
 
 ## Question 2 (10 points)
 
-Create a graph representing the CPI of the Non Combinational CPU in 4 systems described
-above with the `stream-64-stride-1-noverify.riscv` benchmark and the
+Create a graph representing the CPI of the Non Combinational CPU in 4 systems
+described above with the `stream-64-stride-1-noverify.riscv` benchmark and the
 `stream-64-stride-4-noverify.riscv` benchmark.
 The X-axis should be grouped by systems.
 
@@ -210,13 +230,18 @@ The X-axis should be grouped by systems.
 
 Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
 Determine the effective bandwidth of each of the systems when running each of
-`stream-64-stride-1-noverify.riscv` and `stream-64-stride-4-noverify.riscv` benchmarks
-with system 4.
+`stream-64-stride-1-noverify.riscv` and `stream-64-stride-4-noverify.riscv`
+benchmarks with system 4.
+
+Effective bandwidth is defined as the amount of data (in bytes) used by the
+core per second.
+For example, when the core executes an `lw` instruction, it uses 4 bytes
+(32 bits) of data in that cycle.
 
 ## Question 4 (10 points)
 
-Create a graph representing the L1 data cache hit ratio and the L1 instruction cache hit
-ratio when running each of `stream-64-stride-1-noverify.riscv` and
+Create a graph representing the L1 data cache hit ratio and the L1 instruction
+cache hit ratio when running each of `stream-64-stride-1-noverify.riscv` and
 `stream-64-stride-4-noverify.riscv` benchmarks with system 4.
 
 # Part III: Performance Analysis
@@ -244,7 +269,8 @@ applications.
 That is why even a low-end chip has some short of a cache system, and why
 a high-end chip tends to dedicate a lot of its area for the cache system.
 
-However, a cache system does not always improve the performance for all workloads.
+However, a cache system does not always improve the performance for all
+workloads.
 In fact, by introducing a cache system, we are making the latency of pulling
 a piece of data from memory higher.
 There are algorithms that are naturally cache unfriendly, and it is
@@ -256,12 +282,15 @@ As you can see from the assignment, the timing within a computer system is
 significantly dependent on the behaviour of workload itself, and a small change
 in a system, like a slightly larger cache size, might significantly change
 the performance of a system.
-Thus, performance evaluation of a new system is usually heavily relied on simulations.
+Thus, performance evaluation of a new system is usually heavily relied on
+simulations.
 For the next assignment, you'll investigate the performance of a system with an
-even more sophisticated cache system where the cache system has to handle accesses
-from multiple CPU cores while having to ensure the correctness of the program.
-We will use another simulator, gem5, which comes with a variety of cache coherency
-protocols allowing investigating the performance of a multiple cores system.
+even more sophisticated cache system where the cache system has to handle
+accesses from multiple CPU cores while having to ensure the correctness of the
+program.
+We will use another simulator, gem5, which comes with a variety of cache
+coherency protocols allowing investigating the performance of a multiple cores
+system.
 
 # Extra Credits
 
