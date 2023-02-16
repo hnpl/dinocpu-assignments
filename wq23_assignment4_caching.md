@@ -319,7 +319,7 @@ when running `stream-64-stride-1-noverify.riscv` compared to running
 The assignment should show that, on a realistic setup, it is very hard to
 keep all stages of the 5-stage pipeline busy when every memory access is
 expensive.
-Even with fast caches, keeping the IPC for this pipeline close to the ideal 1.0
+Even with fast caches, keeping the IPC for *this* pipeline close to the ideal 1.0
 is unattainable if you want to keep the CPU frequency high.
 
 Not only the 5-stage pipeline suffers from the problem of memory being
@@ -328,10 +328,15 @@ To keep the pipeline as busy as possible, modern architectures have a fetch
 stage with ability to fetch and issue multiple instructions at a time, and
 speculatively fetches instructions to instruction cache, and fetches data
 to data cache.
-Those technique, along with multi-issue and multi-way execution, are for
-exploiting ILP.
+Those technique, along with multi-issue, multi-way execution, and using load/store
+queues, are for exploiting ILP.
+
 However, exploiting ILP can only help improving the performance so much
 until the CPU has to run a memory-intensive applications.
+Modern architectures have private caches for each core as well as shared caches
+shared among the cores.
+Even if a CPU can hold (a quite limited amount of) load/store instructions at a time,
+there's a limit on how many requests can be processed in parallel.
 In the next assignment, you will explore a case where, even though the
 applications are memory-intensive, if the data can be independently processed,
 there are DLP techniques exist in hardware that helps increasing the throughput
@@ -369,7 +374,36 @@ We will use another simulator, gem5, which comes with a variety of cache
 coherency protocols allowing investigating the performance of a multiple cores
 system.
 
-# Extra Credits
+# Extra Credits (10 points)
+
+Improve the performance of the non combination pipelined CPU when running *any* of
+application in the Full Application tests and their `-loops-unrolled` variants.
+You can find the tests [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1096)
+and [here](https://github.com/ECS154B-WQ23/dinocpu-assignment3/blob/main/src/main/scala/testing/InstTests.scala#L1178).
+
+The new CPU performance should match one of the following cases,
+1. General performance improvement accross most full application tests.
+It's okay to have a marginal performance improvement in this case.
+2. The CPU performs especially well (>1.2x speedup) on a couple of full applications,
+while suffers slowdowns on other full applications. Those designs are called
+application accelerators.
+
+Constraints:
+- You are not allowed to modify the latency or capacity of the existing memory
+components.
+- You are also not allowed to change the memory hierarchy, such as adding another
+level of cache.
+
+However, you can make any changes to the core such as adding more component to the core.
+You also can change the internal of the memory components, such as changning the
+cache replacement policy, or allowing the memory interface to send a response and
+receive a request within the same cycle.
+
+To submit the extra credits portion, email either TAs or the instruction with the
+following files,
+- The zip file containing all files that you modified.
+- A pdf report describing what you did to improve the performance of the CPU, and
+the speedups/slowdowns achieved from the Full Application tests.
 
 # Footnotes
 
