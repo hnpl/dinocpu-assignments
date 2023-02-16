@@ -321,7 +321,7 @@ when running `stream-64-stride-1-noverify.riscv` compared to running
 The assignment should show that, on a realistic setup, it is very hard to
 keep all stages of the 5-stage pipeline busy when every memory access is
 expensive.
-Even with fast caches, keeping a CPI for this pipeline close to 1.0 is
+Even with fast caches, keeping the IPC for this pipeline close to 1.0 is
 unattainable if you want to keep the CPU frequency high.
 
 On the hardware/software interaction side, the simple benchmarks should reveal
