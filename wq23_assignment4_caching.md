@@ -397,7 +397,8 @@ level of cache.
 However, you can make any changes to the core such as adding more component to the core.
 You also can change the internal of the memory components, such as changning the
 cache replacement policy, or allowing the memory interface to send a response and
-receive a request within the same cycle.
+receive a request within the same cycle, or optimize the state diagram of the cache
+component.
 
 To submit the extra credits portion, email either TAs or the instruction with the
 following files,
