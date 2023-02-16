@@ -322,23 +322,6 @@ expensive.
 Even with fast caches, keeping the IPC for this pipeline close to the ideal 1.0
 is unattainable if you want to keep the CPU frequency high.
 
-On the hardware/software interaction side, the simple benchmarks should reveal
-the effectiveness of the cache system on different program behaviours.
-Having a cache system, even a simple one like in the DINO CPU, drastically
-improves the performance of the system on a lot (but not all) of real world
-applications.
-That is why even a low-end chip has some short of a cache system, and why
-a high-end chip tends to dedicate a lot of its area for the cache system.
-
-However, a cache system does not always improve the performance for all
-workloads.
-In fact, by introducing a cache system, we are making the latency of pulling
-a piece of data from memory higher.
-There are algorithms that are naturally cache unfriendly, and it is
-still an open question on whether the cache system should be able to adapt to
-a variety algorithms, or the software developers should reprogram the program
-to maximize the utilization of the cache system.
-
 Not only the 5-stage pipeline suffers from the problem of memory being
 slower than the core.
 To keep the pipeline as busy as possible, modern architectures have a fetch
@@ -353,6 +336,24 @@ In the next assignment, you will explore a case where, even though the
 applications are memory-intensive, if the data can be independently processed,
 there are DLP techniques exist in hardware that helps increasing the throughput
 of memory accesses to hide the high memory latency.
+
+On the hardware/software interaction side, for this assignment, the simple
+benchmarks should reveal the effectiveness of the cache system on different
+program behaviours.
+Having a cache system, even a simple one like in the DINO CPU, drastically
+improves the performance of the system on a lot (but not all) of real world
+applications.
+That is why even a low-end chip has some short of a cache system, and why
+a high-end chip tends to dedicate a lot of its area for the cache system.
+
+However, a cache system does not always improve the performance for all
+workloads.
+In fact, by introducing a cache system, we are making the latency of pulling
+a piece of data from memory higher.
+There are algorithms that are naturally cache unfriendly, and it is
+still an open question on whether the cache system should be able to adapt to
+a variety algorithms, or the software developers should reprogram the program
+to maximize the utilization of the cache system.
 
 On the other hand, as you can see from the assignment, the timing within a computer system is
 significantly dependent on the behaviour of workload itself, and a small change
