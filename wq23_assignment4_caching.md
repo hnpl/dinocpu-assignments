@@ -252,11 +252,12 @@ Lab4 / testOnly dinocpu.FullApplicationsTesterLab4
 ```
 
 **Notes:**
-
-- For `SmallTestsTesterLab4` tests: It is expected that some of the store tests
-(ones start with `s` prefix) will fail because there are data in the cache that
-are not written back to the RAM yet! Those store tests only check the data in
-RAM rather than in cache, hence the test failures.
+- The tests on Gradescope are **without** caches.
+- For `SmallTestsTesterLab4` tests: It is expected that, if you are using a system
+**with** data caches, some of the store tests (ones start with `s` prefix) will fail
+because there are data in the cache that are not written back to the RAM yet!
+Those store tests only check the data in RAM rather than in cache, hence the test
+failures.
 - For `FullApplicationsTesterLab4` tests: This test suite includes
 `stream-64-stride-1.riscv` and `stream-64-stride-4.riscv`, which are used to ensure
 the benchmarks we used in Part II and Part III run correctly.
