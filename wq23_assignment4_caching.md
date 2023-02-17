@@ -125,7 +125,7 @@ The Instruction Cache is optimized for read-only accesses.
 The Data Cache supports both read and write operations.
 Each of the L1I and L1D is 4-way associtive cache having 32 entries.
 The cache block size is 8 bytes.
-Each cache uses the LRU replacement policy.
+Each cache uses the LRU replacement policy, and the write-back write policy.
 
 ### DINOCPU Cache Details
 
