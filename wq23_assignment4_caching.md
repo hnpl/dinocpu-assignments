@@ -111,7 +111,11 @@ with that was least recently accessed.
 
 # The Computer System
 
-(TODO: add diagrams illustrating the system differences)
+![wq23_diagrams](wq23_diagrams/systems.svg)
+**Figure 1.** Illustration of the systems that we use for evaluating of the caches.
+On each system, the left arrows are wires responsible for sending instruction memory
+requests/responses, while the right arrows are wires responsible for sending data
+memory requests/responses.
 
 ## The Core
 
