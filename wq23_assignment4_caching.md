@@ -20,6 +20,7 @@ Originally from ECS 154B Lab 4, Winter 2023.
 * [The Benchmarks](#the-benchmarks)
 * [Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU](#part-i-implementing-the-hazard-detection-unit-for-non-combinational-pipelined-cpu)
   * [The new memory interface](#the-new-memory-interface)
+  * [The contract between the core and the Memory Interface](#the-contract-between-the-core-and-the-memory-interface)
   * [Updating the Pipelined CPU](#updating-the-pipelined-cpu)
   * [Testing the Non Combinational Pipelined CPU](#testing-the-non-combinational-pipelined-cpu)
 * [Part II: Performance Evaluation](#part-ii-performance-evaluation)
@@ -111,7 +112,7 @@ with that was least recently accessed.
 
 # The Computer System
 
-![wq23_diagrams](wq23_diagrams/systems.svg)
+![system_diagrams](wq23_diagrams/systems.svg)
 **Figure 1.** Illustration of the systems that we use for evaluating of the caches.
 On each system, the left arrows are wires responsible for sending instruction memory
 requests/responses, while the right arrows are wires responsible for sending data
@@ -217,9 +218,29 @@ pipelined CPU in `components/hazardnoncombin.scala`.
 
 ## The new memory interface
 
-(TODO: add a contract between CPU and the Mem Interface)
+![mem_interface_diagrams](wq23_diagrams/mem-interface.svg)
 
-(TODO: diagram of the new interface)
+**Figure 2.** The new memory interface, which includes a bundle of valid/ready/good signals
+that are used for synchronization between the core and the memory subsystem. Both `imem` and
+`dmem` use the new memory interface. Other than the new signals, the input signals and output
+signals of the memory are the same. E.g., for the instruction memory interface, the memory
+request signal consists of the `address` signal, and the memory response signal consists of
+`instruction` signal.
+
+
+## The contract between the core and the Memory Interface
+
+- The CPU only sends a request when valid is true and Memory is ready.
+- The memory only processes one request at a time.
+- If the memory receives a request in the current cycle, it will start processing the request in the
+next cycle.
+- If the memory is not ready, then even if the CPU sets valid to 1, the memory does not receive
+the request.
+- The memory only guarantees the response to be correct when and only when the `good`
+signal is 1. It means, if the `good` signal is 0, the response might contain garbage.
+- The `good` signal is only set to one for 1 cycle. It means, the response is only guaranteed to
+be correct in that cycle.
+
 
 ## Updating the Pipelined CPU
 
