@@ -230,7 +230,7 @@ request signal consists of the `address` signal, and the memory response signal 
 
 ## The contract between the core and the Memory Interface
 
-- The CPU only sends a request when valid is true and Memory is ready.
+- The core only sends a request when the core set the valid signal to true and Memory is ready.
 - The memory only processes one request at a time.
 - If the memory receives a request in the current cycle, it will start processing the request in the
 next cycle.
@@ -272,7 +272,7 @@ Meaning, only advance an instruction from IF stage to ID stage when imem's good 
 is set.
 - There are multiple ways of handling control hazards and data dependencies when
 timing involves. You can follow discussion sessions for suggested ways. However, the
-suggestions might not be the optimal ways. It is encouraged to discuss about dealing
+suggestions might not be the optimal ways. You are encouraged to discuss about dealing
 with timing in the pipeline with your peers/TAs/instructor. You do have to write
 the code yourself, however.
 - There's no guarantee in terms of memory request latency when there is a cache miss.
