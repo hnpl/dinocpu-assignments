@@ -332,7 +332,7 @@ correct implementation might slightly differs in terms of the optimality, and
 thus we don't expect to see exactly the same amount of cycles per each data point
 when comparing your implementation and the solution.
 However, as long as the correct is ensured, the general trend of the number of
-cycles should not (i.e., there are some systems that are strictly slower than
+cycles should not differ (i.e., there are some systems that are strictly slower than
 others).
 So, we opt to use graphs rather than exact numbers for reporting data.
 
@@ -364,7 +364,7 @@ The X-axis should be grouped by systems.
 data on the graph are not the real CPI of running the mentioned benchmarks on
 the four systems.
 
-## Question 3 (15 points)You don't have to modify the `cpu-noncombin.scala` file.
+## Question 3 (15 points)
 
 Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
 Create a graph illustraing the effective bandwidth of system 4 when running
