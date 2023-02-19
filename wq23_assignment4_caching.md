@@ -245,6 +245,9 @@ the request.
 signal is 1. It means, if the `good` signal is 0, the response might contain garbage.
 - The `good` signal is only set to one for 1 cycle. It means, the response is only guaranteed to
 be correct in that cycle.
+- A load instruction will result in a read memory request being sent to the memory subsystem.
+- A store instruction will result in a read memory request and a write memory request being
+sent to the memory subsystem.
 
 ## Updating the Pipelined CPU
 
