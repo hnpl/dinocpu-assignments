@@ -362,7 +362,7 @@ described above with the `stream-64-stride-1-noverify.riscv` benchmark and the
 `stream-64-stride-4-noverify.riscv` benchmark.
 The X-axis should be grouped by systems.
 
-![CPI_graph](wq23_diagrams/CPI-graph-example.png)
+![CPI_graph](wq23_diagrams/CPI-graph-example.svg)
 **Figure 3.** An example of a CPI graph with the collected data. Note that the
 data on the graph are not the real CPI of running the mentioned benchmarks on
 the four systems.
