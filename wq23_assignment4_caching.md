@@ -209,7 +209,10 @@ pipelined implentation. The `stream-64-stride-1-noverify.riscv`
 and `stream-64-stride-4-noverify.riscv` are used for performance
 evaluation.
 
-(TODO: C-code <-> RISCV assembly map)
+![benchmark](wq23_diagrams/stream-for-loop.svg)
+**Figure 2.** The main part of the stream benchmarks consist of calling the copy()
+function twice. When running each of the benchmarks, the CPU spends most time
+executing the instruction inside the copy() function.
 
 # Part I: Implementing the Hazard Detection Unit for Non Combinational Pipelined CPU
 
@@ -225,7 +228,7 @@ non combinational core.
 
 ![mem_interface_diagrams](wq23_diagrams/mem-interface.svg)
 
-**Figure 2.** The new memory interface, which includes a bundle of valid/ready/good signals
+**Figure 3.** The new memory interface, which includes a bundle of valid/ready/good signals
 that are used for synchronization between the core and the memory subsystem. Both `imem` and
 `dmem` use the new memory interface. Other than the new signals, the input signals and output
 signals of the memory are the same. E.g., for the instruction memory interface, the memory
@@ -363,7 +366,7 @@ described above with the `stream-64-stride-1-noverify.riscv` benchmark and the
 The X-axis should be grouped by systems.
 
 ![CPI_graph](wq23_diagrams/CPI-graph-example.svg)
-**Figure 3.** An example of a CPI graph with the collected data. Note that the
+**Figure 4.** An example of a CPI graph with the collected data. Note that the
 data on the graph are not the real CPI of running the mentioned benchmarks on
 the four systems.
 
