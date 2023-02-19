@@ -306,14 +306,23 @@ For this assignment, we will consider 4 systems,
 - System 3: Non Combinational Pipelined CPU + Data Cache (No Instruction Cache)
 - System 4: Non Combinational Pipelined CPU + Instruction Cache + Data Cache
 
-**Notes:** You don't have to report raw numbers or how the calculation was done
-for question 2 and question 3.
+**Notes:** Since there are multiple ways of dealing with timing in a CPU, each
+correct implementation might slightly differs in terms of the optimality, and
+thus we don't expect to see exactly the same amount of cycles per each data point
+when comparing your implementation and the solution.
+However, as long as the correct is ensured, the general trend of the number of
+cycles should not (i.e., there are some systems that are strictly slower than
+others).
+So, we opt to use graphs rather than exact numbers for reporting data.
+
+**Notes:** You don't have to report raw data or how the calculation was done
+for question 2, question 3, and question 4.
 If you are unsure about the correctness of the graph, you can show the formula
 that you used to generate the data for the graph.
-However, the graphs must have the X-axis and Y-axis with data labels and units.
+However, the graphs must have the X-axis and Y-axis with labels and units.
 An example graph will be discussed in during one of the discussion sessions.
 
-## Question 1 (5 points)
+## Question 1 (10 points)
 
 Determine the number of dynamic instructions of the
 `stream-64-stride-1-noverify.riscv` and the
@@ -322,7 +331,7 @@ Determine the number of dynamic instructions of the
 **Hint:** Single cycle CPU and pipelined CPU should have exactly the same
 amount of executed instructions for each binary.
 
-## Question 2 (10 points)
+## Question 2 (20 points)
 
 Create a graph representing the CPI of the Non Combinational CPU in 4 systems
 described above with the `stream-64-stride-1-noverify.riscv` benchmark and the
@@ -334,19 +343,22 @@ The X-axis should be grouped by systems.
 data on the graph are not the real CPI of running the mentioned benchmarks on
 the four systems.
 
-## Question 3 (10 points)
+## Question 3 (15 points)
 
 Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
-Determine the effective bandwidth of each of the systems when running each of
-`stream-64-stride-1-noverify.riscv` and `stream-64-stride-4-noverify.riscv`
-benchmarks with system 4.
+Create a graph illustraing the effective bandwidth of system 4 when running
+each of `stream-64-stride-1-noverify.riscv` and
+`stream-64-stride-4-noverify.riscv` benchmarks.
 
-Effective bandwidth is defined as the amount of data (in bytes) used by the
+Effective bandwidth is defined as the amount of data used by the
 core per second.
 For example, when the core executes an `lw` instruction, it uses 4 bytes
 (32 bits) of data in that cycle.
 
-## Question 4 (10 points)
+**Note:** The unit can be bytes/second, or a multiple of bytes/second, such as
+KiB/second and MiB/second/
+
+## Question 4 (15 points)
 
 Create a graph representing the L1 data cache hit ratio and the L1 instruction
 cache hit ratio when running each of `stream-64-stride-1-noverify.riscv` and
@@ -354,12 +366,12 @@ cache hit ratio when running each of `stream-64-stride-1-noverify.riscv` and
 
 # Part III: Performance Analysis
 
-## Question 5 (20 points)
+## Question 5 (10 points)
 
 Between data cache and instruction cache, do you think which cache has more
 impact on performance? Explain why using the data from part II.
 
-## Question 6 (25 points)
+## Question 6 (10 points)
 
 From the data from Part II, you should see system 4 performs better
 when running `stream-64-stride-1-noverify.riscv` compared to running
@@ -372,12 +384,12 @@ See the Submission section for more details.
 | Part                | Percentage |
 |---------------------|------------|
 | Part 4.1            |        20% |
-| Part 4.2 Question 1 |         5% |
-| Part 4.2 Question 2 |        10% |
-| Part 4.2 Question 3 |        10% |
-| Part 4.2 Question 4 |        10% |
-| Part 4.3 Question 5 |        20% |
-| Part 4.3 Question 6 |        25% |
+| Part 4.2 Question 1 |        10% |
+| Part 4.2 Question 2 |        20% |
+| Part 4.2 Question 3 |        15% |
+| Part 4.2 Question 4 |        15% |
+| Part 4.3 Question 5 |        10% |
+| Part 4.3 Question 6 |        10% |
 | Extra Credits       |        10% |
 
 ## Submission
