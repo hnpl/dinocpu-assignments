@@ -286,6 +286,16 @@ Lab4 / testOnly dinocpu.SmallTestsTesterLab4
 Lab4 / testOnly dinocpu.FullApplicationsTesterLab4
 ```
 
+To run a test,
+```scala
+runMain dinocpu.simulate_predefined_system <system_name> <riscv_binary>
+```
+where,
+`<system_name>` is one of `default`, `system1`, `system2`, `system3`, and `system4`.
+The `default` system should be used for testing purpose.
+The `default` system is structurally the same as `system1` except that the RAM latency
+is 1 cycle instead of 30 cycles in other systems.
+
 **Notes:**
 - The tests on Gradescope are **without** caches.
 - For `SmallTestsTesterLab4` tests: It is expected that, if you are using a system
@@ -304,6 +314,18 @@ For this assignment, we will consider 4 systems,
 - System 2: Non Combinational Pipelined CPU + Instruction Cache (No Data Cache)
 - System 3: Non Combinational Pipelined CPU + Data Cache (No Instruction Cache)
 - System 4: Non Combinational Pipelined CPU + Instruction Cache + Data Cache
+
+To run a benchmark on a system,
+```scala
+runMain dinocpu.simulate_predefined_system <system_name> <riscv_binary>
+```
+where,
+- `<system_name>` is one of `default`, `system1`, `system2`, `system3`, and `system4`.
+The `default` system should be used for testing purpose.
+The `default` system is structurally the same as `system1` except that the RAM latency
+is 1 cycle instead of 30 cycles in other systems.
+- `<riscv_binary>` is name of the benchmark.
+
 
 **Notes:** Since there are multiple ways of dealing with timing in a CPU, each
 correct implementation might slightly differs in terms of the optimality, and
