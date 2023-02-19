@@ -215,6 +215,11 @@ evaluation.
 
 In this part, you will complete the hazard detection unit for the non combinational
 pipelined CPU in `components/hazardnoncombin.scala`.
+The descriptions on top of the file that file should give explaination for the meaning
+of each signal.
+The following subsections describe the changes in the cores as well as in the memory.
+Note that you don't have to change any component other than the hazard unit for the
+non combinational core.
 
 ## The new memory interface
 
@@ -241,23 +246,17 @@ signal is 1. It means, if the `good` signal is 0, the response might contain gar
 - The `good` signal is only set to one for 1 cycle. It means, the response is only guaranteed to
 be correct in that cycle.
 
-
 ## Updating the Pipelined CPU
+
+The pipelined CPU that is compatible with non combinational memory components is located
+at `pipelined/cpu-noncombin.scala` file.
+You don't have to modify the `cpu-noncombin.scala` file.
 
 The DINO CPU have a new memory interface for both `imem` and `dmem` for this
 assignment.
 
 The code for the Non Combination Pipelined CPU is mostly the same as the Pipelined CPU.
 However, we are going to use the `HazardUnitNonCombin` rather than `HazardUnit`.
-
-The non combinational CPU scala file will be uploaded after the assignment 3's late
-due date.
-In the mean time, you can reuse code in assignment 3 with a few necessary
-modifications in `pipelined/cpu-noncombin.scala`,
-- Wiring the inputs/outputs of the `HazardUnitNonCombin` accordingly.
-- Setting the imem's valid signal to true. 
-- Setting the dmem's valid signal to true only when the core sends a memory request to
-data memory.
 
 ## Hints
 
@@ -343,7 +342,7 @@ The X-axis should be grouped by systems.
 data on the graph are not the real CPI of running the mentioned benchmarks on
 the four systems.
 
-## Question 3 (15 points)
+## Question 3 (15 points)You don't have to modify the `cpu-noncombin.scala` file.
 
 Assume that the pipelined non combinational CPU is clocked at 2.5GHz.
 Create a graph illustraing the effective bandwidth of system 4 when running
